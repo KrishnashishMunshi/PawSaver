@@ -7,11 +7,13 @@
     <title>PawSaver - Dog Health Monitoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
 </head>
 <body class = "min-h-screen flex flex-col">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/forms@0.4.0/dist/index.min.js"></script>
-
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
     <!-- Navbar -->
     <nav class="bg-white/90 backdrop-blur-md shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6">
@@ -65,66 +67,6 @@
             </div>
         </div>
     </nav>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
-        let isOpen = false;
-
-        mobileMenuButton.addEventListener('click', () => {
-            isOpen = !isOpen;
-            if (isOpen) {
-                mobileMenu.classList.remove('hidden');
-                menuIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
-            } else {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            }
-        });
-
-        // Navbar scroll effect
-        let lastScroll = 0;
-        const navbar = document.getElementById('navbar');
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll <= 0) {
-                navbar.classList.remove('shadow-lg');
-                navbar.classList.add('shadow-md');
-                return;
-            }
-
-            if (currentScroll > lastScroll) {
-                // Scrolling down
-                navbar.classList.add('-translate-y-full');
-            } else {
-                // Scrolling up
-                navbar.classList.remove('-translate-y-full');
-                navbar.classList.add('shadow-lg');
-            }
-
-            lastScroll = currentScroll;
-        });
-
-        // Close mobile menu on window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024) {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-                isOpen = false;
-            }
-        });
-    </script>
-    
-    
-    
 
     <!-- Main Content Block -->
     <main class="flex-grow">
