@@ -1,0 +1,306 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Animated background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-r from-sky-400 via-pink-200 to-sky-400 animate-gradient"></div>
+        
+        <!-- Animated shapes -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div class="absolute top-40 right-20 w-72 h-72 bg-sky-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-40 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <!-- Content container -->
+        <div class="relative container mx-auto px-6 text-center">
+            <!-- Main content -->
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-8 inline-block">
+                    <span class="bg-white/90 text-sky-600 px-4 py-2 rounded-full text-sm font-semibold tracking-wide shadow-lg">
+                        🐾 The Future of Pet Care Is Here
+                    </span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-800 leading-tight animate-fade-in">
+                    Revolutionizing
+                    <span class="relative">
+                        <span class="relative inline-block">
+                            Dog Health
+                            <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 358 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 5.8c54-4 98.5-4 174.5-1.5s160.5 4 179.5 1.5" stroke="#F472B6" stroke-width="4" stroke-linecap="round"></path>
+                            </svg>
+                        </span>
+                    </span>
+                    Monitoring
+                </h1>
+                
+                <p class="text-xl md:text-2xl mb-12 text-gray-700 max-w-2xl mx-auto leading-relaxed">
+                    Keep your furry friend safe and healthy with real-time tracking and emergency alerts. 
+                    <span class="font-semibold">24/7 peace of mind</span> for pet parents.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+                    <a href="/signup" class="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white py-4 px-8 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        Get Started Now
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                    <a href="/demo" class="inline-flex items-center justify-center bg-white/90 hover:bg-white text-sky-600 py-4 px-8 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        Watch Demo
+                        <i class="fas fa-play-circle ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="flex flex-wrap justify-center items-center gap-8 text-gray-600">
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt text-xl mr-2"></i>
+                        <span>256-bit Encryption</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-star text-xl mr-2"></i>
+                        <span>4.9/5 Rating</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-heart text-xl mr-2"></i>
+                        <span>10K+ Happy Pets</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-out;
+        }
+    </style>
+
+    <!-- Features Section -->
+    <section class="py-24 bg-gradient-to-b from-sky-50 to-sky-100 relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-20 left-20 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+            <div class="absolute top-40 right-20 w-64 h-64 bg-sky-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-20 left-1/2 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-sky-700 mb-4">
+                    Key Features
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Discover how PawSaver helps you keep your furry friend safe and healthy
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <!-- Heart Rate Monitoring Card -->
+                <div class="group">
+                    <div class="p-8 bg-white rounded-xl shadow-lg transform transition-all duration-500 ease-in-out hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-sky-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-heartbeat text-3xl text-pink-500"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-sky-700 mb-4">Heart Rate Monitoring</h3>
+                            <p class="text-gray-600 mb-6">Monitor your dog's heart rate and health status in real-time with advanced sensors and AI technology.</p>
+                            <button class="bg-sky-500 text-white px-6 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 hover:bg-sky-600">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPS Tracking Card -->
+                <div class="group">
+                    <div class="p-8 bg-white rounded-xl shadow-lg transform transition-all duration-500 ease-in-out hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-sky-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-map-marker-alt text-3xl text-sky-500"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-sky-700 mb-4">GPS Tracking</h3>
+                            <p class="text-gray-600 mb-6">Always know your dog's location with live GPS tracking and customizable safe zones alerts.</p>
+                            <button class="bg-sky-500 text-white px-6 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 hover:bg-sky-600">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Alerts Card -->
+                <div class="group">
+                    <div class="p-8 bg-white rounded-xl shadow-lg transform transition-all duration-500 ease-in-out hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-sky-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-bell text-3xl text-blue-500"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-sky-700 mb-4">Emergency Alerts</h3>
+                            <p class="text-gray-600 mb-6">Receive instant alerts if any abnormal behavior is detected with our smart AI monitoring.</p>
+                            <button class="bg-sky-500 text-white px-6 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 hover:bg-sky-600">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+
+    <!-- Call to Action Section -->
+    <section class="relative py-24 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-r from-sky-400 via-pink-300 to-sky-400 opacity-90"></div>
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+            <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-sky-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="relative container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <!-- Main Content -->
+                <div class="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl p-12 text-center">
+                    <div class="inline-block mb-6">
+                        <span class="bg-sky-100 text-sky-600 px-4 py-2 rounded-full text-sm font-semibold">
+                            Limited Time Offer - 30 Days Free Trial
+                        </span>
+                    </div>
+
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-sky-600 to-pink-400 bg-clip-text text-transparent">
+                        Join Thousands of Happy Pet Parents
+                    </h2>
+
+                    <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                        Start monitoring your pet's health today and get peace of mind knowing they're safe and healthy.
+                    </p>
+
+                    <!-- Stats Section -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-sky-600 mb-2">10K+</div>
+                            <div class="text-gray-600">Active Users</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-sky-600 mb-2">98%</div>
+                            <div class="text-gray-600">Satisfaction Rate</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-sky-600 mb-2">24/7</div>
+                            <div class="text-gray-600">Support Available</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Section -->
+                    <div class="flex flex-col items-center space-y-6">
+                        <a href="/signup" class="group relative inline-flex items-center justify-center bg-gradient-to-r from-sky-600 to-pink-400 text-white px-8 py-4 rounded-full text-xl font-semibold shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                            Get Started Free
+                            <svg class="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        
+                        <p class="text-sm text-gray-600">
+                            No credit card required • Cancel anytime • 30-day free trial
+                        </p>
+                    </div>
+
+                    <!-- Testimonial -->
+                    <div class="mt-12 pt-12 border-t border-gray-200">
+                        <div class="flex flex-col items-center">
+                            <div class="flex -space-x-2 mb-4">
+                                <img src="/api/placeholder/40/40" alt="User" class="w-10 h-10 rounded-full border-2 border-white"/>
+                                <img src="/api/placeholder/40/40" alt="User" class="w-10 h-10 rounded-full border-2 border-white"/>
+                                <img src="/api/placeholder/40/40" alt="User" class="w-10 h-10 rounded-full border-2 border-white"/>
+                            </div>
+                            <p class="text-gray-600 italic mb-4">
+                                "PawSaver has given me peace of mind knowing my dog is safe and healthy. The real-time alerts are a game-changer!"
+                            </p>
+                            <p class="font-semibold text-sky-600">Sarah & Max 🐕</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+    </style>
+{% endblock %}
+
+
+
