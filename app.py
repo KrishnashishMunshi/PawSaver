@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, g
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -7,19 +7,14 @@ from typing import List
 import datetime
 from flask_sqlalchemy import SQLAlchemy
 import os
+import random
 
 
 app = Flask(__name__)
 
+DATABASE= "app.db"
 
-@dataclass
-class DogHealth:
-    id: int
-    name: str
-    heart_rate: int
-    blood_oxygen: float
-    health_status: str
-    last_updated: datetime.datetime
+
 
 # Set the database URI
 base_dir = os.path.abspath(os.path.dirname(__file__))
@@ -47,6 +42,20 @@ def init_db():
                 password TEXT NOT NULL
             )
         ''')
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS dogs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                age INTEGER NOT NULL,
+                health_status TEXT NOT NULL,
+                distance REAL NOT NULL,
+                heart_rate INTEGER NOT NULL,
+                blood_oxygen INTEGER NOT NULL,
+                last_updated TEXT NOT NULL,
+                image_url TEXT
+            );
+        ''')
+
         conn.commit()
 
 init_db()
@@ -77,23 +86,6 @@ def load_user(user_id):
         return User(id=result[0], username=result[1], email=result[2])
     return None
 
-class DogHealthMonitor:
-    def __init__(self):
-        # Sample static data
-        self.dogs = [
-            DogHealth(1, "Max", 75, 98.5, "Healthy", datetime.datetime.now()),
-            DogHealth(2, "Luna", 82, 97.2, "Active", datetime.datetime.now()),
-            DogHealth(3, "Rocky", 90, 96.8, "Needs Rest", datetime.datetime.now())
-        ]
-    
-    def get_all_dogs(self) -> List[DogHealth]:
-        return self.dogs
-    
-    def get_dog_by_id(self, dog_id: int) -> DogHealth:
-        return next((dog for dog in self.dogs if dog.id == dog_id), None)
-
-monitor = DogHealthMonitor()
-
 @app.route("/api/links")
 def get_links():
     if current_user.is_authenticated:
@@ -115,6 +107,8 @@ def get_links():
 
 @app.route('/')
 def home():
+    if current_user.is_authenticated:
+        return redirect("/dashboard")
     return render_template('home.html')
 
 # Signup route
@@ -163,11 +157,56 @@ def login():
 
     return render_template("login.html")
 
+
+
+def get_db():
+    """Connect to SQLite database"""
+    db = getattr(g, "_database", None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+        db.row_factory = sqlite3.Row  # Return results as dictionary-like objects
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    """Close database connection when request is done"""
+    db = getattr(g, "_database", None)
+    if db is not None:
+        db.close()
+
+def get_all_dogs():
+    """Fetch all dogs from the database"""
+    db = get_db()
+    cursor = db.execute("SELECT * FROM dogs")
+    return cursor.fetchall()
+
+def get_dog_by_id(dog_id):
+    """Fetch a single dog by ID"""
+    db = get_db()
+    cursor = db.execute("SELECT * FROM dogs WHERE id = ?", (dog_id,))
+    return cursor.fetchone()
+
+
+@app.route("/dog/<int:dog_id>")
+def dog_profile(dog_id):
+    dog = get_dog_by_id(dog_id)
+    if not dog:
+        return "Dog not found", 404
+    return render_template("dog_profile.html", dog=dog)
+
+# API for real-time pulse data
+@app.route("/api/pulse/<int:dog_id>")
+def get_pulse(dog_id):
+    pulse_data = [random.randint(60, 140) for _ in range(10)]  # Mocked real-time data
+    return jsonify(pulse_data)
+
+
+
 # Dashboard route (protected)
 @app.route("/dashboard")
 def dashboard():
-    
-    return render_template("dashboard.html",   dogs=monitor.get_all_dogs())
+    dogs = get_all_dogs()
+    return render_template("dashboard.html", dogs=dogs)
 
 @app.route('/logout')
 def logout():
@@ -177,6 +216,3 @@ def logout():
 if __name__ == "__main__":
     app.run(debug=True)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)

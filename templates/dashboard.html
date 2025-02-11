@@ -3,29 +3,11 @@
 {% block body %}
 <style>
 .card-hover {
-    transform: translateY(0);
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 .card-hover:hover {
-    transform: translateY(-5px);
-}
-.metric-container {
-    transition: all 0.2s ease;
-}
-.metric-container:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-.status-badge {
-    transition: all 0.3s ease;
-}
-.status-badge:hover {
-    transform: translateX(3px);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 </style>
 
@@ -34,52 +16,38 @@
         <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-sky-600 to-pink-400 bg-clip-text text-transparent">
             Dog Health Monitor
         </h1>
-        <span class="text-sm text-gray-500 flex items-center">
-            <i class="fas fa-signal mr-2 animate-pulse"></i>
-            Real-time monitoring
-        </span>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {% for dog in dogs %}
-        <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
-            <div class="border-b bg-gradient-to-r from-sky-50 to-pink-50 p-4">
-                <div class="flex items-center justify-between">
-                    <span class="text-lg sm:text-xl font-bold text-gray-800 hover:text-sky-600 transition-colors">
-                        {{ dog.name }}
-                    </span>
-                    <span class="status-badge px-3 py-1 rounded-full text-sm font-medium {% if dog.health_status == 'Healthy' %}bg-gradient-to-r from-green-400 to-green-500{% elif dog.health_status == 'Active' %}bg-gradient-to-r from-sky-400 to-sky-500{% else %}bg-gradient-to-r from-yellow-400 to-yellow-500{% endif %} text-white shadow-sm">
-                        {{ dog.health_status }}
-                    </span>
-                </div>
-            </div>
-            <div class="space-y-3 p-4 sm:p-6">
-                <div class="metric-container flex items-center space-x-4 p-3 rounded-lg bg-sky-50 cursor-pointer">
-                    <i class="fas fa-heartbeat text-pink-400 text-lg sm:text-xl"></i>
-                    <div class="flex-1">
-                        <p class="text-sm text-gray-600">Pulse Rate</p>
-                        <p class="text-base sm:text-lg font-semibold text-gray-800">{{ dog.heart_rate }} BPM</p>
+        <a href="{{ url_for('dog_profile', dog_id=dog.id) }}" class="block">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover cursor-pointer">
+                <div class="border-b bg-gradient-to-r from-sky-50 to-pink-50 p-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg sm:text-xl font-bold text-gray-800 hover:text-sky-600 transition-colors">
+                            {{ dog.name }}
+                        </span>
+                        <span class="status-badge px-3 py-1 rounded-full text-sm font-medium
+                            {% if dog.health_status == 'Healthy' %} bg-green-400 text-white 
+                            {% elif dog.health_status == 'At Risk' %} bg-yellow-400 text-white 
+                            {% else %} bg-red-400 text-white {% endif %} ">
+                            {{ dog.health_status }}
+                        </span>
                     </div>
                 </div>
-
-                <div class="metric-container flex items-center space-x-4 p-3 rounded-lg bg-pink-50 cursor-pointer">
-                    <i class="fas fa-tint text-sky-400 text-lg sm:text-xl"></i>
-                    <div class="flex-1">
-                        <p class="text-sm text-gray-600">Blood Oxygen</p>
-                        <p class="text-base sm:text-lg font-semibold text-gray-800">{{ dog.blood_oxygen }}%</p>
-                    </div>
-                </div>
-
-                <div class="metric-container flex items-center space-x-4 p-3 rounded-lg bg-gray-50">
-                    <i class="fas fa-clock text-gray-400 text-lg sm:text-xl"></i>
-                    <div class="flex-1">
-                        <p class="text-sm text-gray-600">Last Updated</p>
-                        <p class="text-sm text-gray-800">{{ dog.last_updated }}</p>
+                <div class="space-y-3 p-4 sm:p-6">
+                    <div class="metric-container flex items-center space-x-4 p-3 rounded-lg bg-sky-50">
+                        <i class="fas fa-heartbeat text-pink-400 text-lg sm:text-xl"></i>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-600">Pulse Rate</p>
+                            <p class="text-base sm:text-lg font-semibold text-gray-800">{{ dog.heart_rate }} BPM</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 </div>
 {% endblock %}
+

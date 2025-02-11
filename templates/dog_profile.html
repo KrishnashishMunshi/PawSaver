@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+#pulseChart {
+    max-width: 100%;
+    height: 300px !important; /* Prevents endless stretching */
+}
+</style>>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-20">
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
+        <h1 class="text-3xl font-bold bg-gradient-to-r from-sky-600 to-pink-400 bg-clip-text text-transparent">
+            {{ dog.name }}'s Profile
+        </h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <img src="{{ dog.image_url }}" class="w-full h-60 object-cover rounded-lg" alt="{{ dog.name }}">
+            <p class="text-lg mt-4"><strong>Age:</strong> {{ dog.age }} years</p>
+            <p class="text-lg"><strong>Health Status:</strong> {{ dog.health_status }}</p>
+            <p class="text-lg"><strong>Distance:</strong> {{ dog.distance }} km away</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Pulse Rate</h2>
+            <canvas id="pulseChart" width="400" height="250"></canvas>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let pulseChart;
+let lastPulse = Math.floor(Math.random() * (100 - 80) + 80);
+
+function generateRealisticPulseData() {
+    let newPulseData = [];
+    
+    for (let i = 0; i < 10; i++) {
+        let newPulse = lastPulse + Math.floor(Math.random() * 6 - 3);
+        newPulse = Math.max(70, Math.min(120, newPulse));
+        newPulseData.push(newPulse);
+        lastPulse = newPulse;
+    }
+
+    return newPulseData;
+}
+
+function getCurrentTimeLabels() {
+    let labels = [];
+    let now = new Date();
+    
+    for (let i = 9; i >= 0; i--) {
+        let time = new Date(now.getTime() - i * 5000); // 5-second intervals
+        let minutes = time.getMinutes().toString().padStart(2, '0');
+        let seconds = time.getSeconds().toString().padStart(2, '0');
+        labels.push(`${minutes}:${seconds}`);
+    }
+
+    return labels;
+}
+
+function renderChart() {
+    const ctx = document.getElementById('pulseChart').getContext('2d');
+
+    pulseChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: getCurrentTimeLabels(),
+            datasets: [{
+                label: 'Pulse Rate (BPM)',
+                data: generateRealisticPulseData(),
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 6, // Larger points for better visibility
+                pointHoverRadius: 8 // Hover effect on points
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: { duration: 500 },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Time (Last 10 Readings)' },
+                    grid: { display: false }
+                },
+                y: {
+                    min: 60,  // Expanding the scale for better visibility
+                    max: 140,
+                    title: { display: true, text: 'Pulse Rate (BPM)' },
+                    grid: { color: 'rgba(200, 200, 200, 0.3)' },
+                    ticks: { stepSize: 5 } // More granularity in readings
+                }
+            }
+        }
+    });
+
+    setInterval(updateChart, 5000);
+}
+
+function updateChart() {
+    pulseChart.data.labels = getCurrentTimeLabels();
+    pulseChart.data.datasets[0].data = generateRealisticPulseData();
+    pulseChart.update();
+}
+
+renderChart();
+
+</script>
+{% endblock %}
+
