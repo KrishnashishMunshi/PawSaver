@@ -208,6 +208,9 @@ def dashboard():
     dogs = get_all_dogs()
     return render_template("dashboard.html", dogs=dogs)
 
+@app.route("/aboutus")
+def aboutus():
+    return render_template("aboutus.html")
 @app.route('/logout')
 def logout():
     logout_user()

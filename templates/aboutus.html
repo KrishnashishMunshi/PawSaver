@@ -1,0 +1,260 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="overflow-hidden relative">
+<!-- Section 1: Introduction - Clean & Thematic -->
+<section class="h-screen flex items-center justify-center bg-white text-center relative overflow-hidden">
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute top-10 left-10 w-32 h-32 bg-sky-300 rounded-full opacity-30 animate-floating"></div>
+    <div class="absolute bottom-20 right-16 w-40 h-40 bg-pink-300 rounded-full opacity-30 animate-floating-slow"></div>
+    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-sky-400 rounded-full opacity-20 animate-pulse"></div>
+
+    <!-- Content -->
+    <div class="max-w-3xl opacity-0 transform translate-y-10 transition-all duration-1000 scroll-reveal z-10">
+        
+        <!-- Main Heading -->
+        <h1 class="text-5xl font-bold text-gray-900 leading-tight">
+            A Smarter Future for <span class="text-sky-500">Stray Dog Care</span>
+        </h1>
+
+        <!-- Subheading -->
+        <p class="mt-4 text-lg text-gray-700 leading-relaxed">
+            Every stray deserves <span class="font-semibold text-pink-500">protection, timely care, and a second chance</span>.  
+            Our AI-powered health monitoring system helps detect health risks before they turn into crises.
+        </p>
+
+        <!-- Call to Action -->
+        <div class="mt-6 flex justify-center space-x-4">
+            <a href="#stats" class="px-6 py-3 bg-sky-500 text-white font-semibold rounded-lg shadow-lg hover:bg-sky-400 transition-all transform hover:scale-105">
+                Learn More
+            </a>
+            <a href="" class="px-6 py-3 bg-pink-500 text-white font-semibold rounded-lg shadow-lg hover:bg-pink-400 transition-all transform hover:scale-105">
+                Join the Mission
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CSS Animations -->
+<style>
+    @keyframes floating {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(15px); }
+        100% { transform: translateY(0px); }
+    }
+    @keyframes floating-slow {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(10px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    .animate-floating { animation: floating 4s infinite ease-in-out; }
+    .animate-floating-slow { animation: floating-slow 6s infinite ease-in-out; }
+</style>
+
+
+
+
+<!-- Section 2: Stray Dog Health Insights -->
+<section class="h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-900 text-center py-12">
+    <div class="max-w-4xl opacity-0 transform translate-y-10 transition-all duration-1000 scroll-reveal">
+        <h2 class="text-3xl font-bold mb-8 text-gray-800">
+            Challenges Faced by Stray Dogs
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Statistic 1 -->
+            <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-2xl font-semibold text-blue-600">Over 60 Million Stray Dogs in India</h3>
+                <p class="mt-4 text-gray-700">India has more than 60 million stray dogs, with 77% of the population encountering a stray dog at least once a week.</p>
+                <p class="mt-2 text-sm text-gray-500">Source: VOA News</p>
+            </div>
+            <!-- Statistic 2 -->
+            <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-2xl font-semibold text-green-600">High Risk of Road Traffic Accidents</h3>
+                <p class="mt-4 text-gray-700">Stray dogs account for 69% of animal-related road traffic accidents, leading to significant injuries and fatalities.</p>
+                <p class="mt-2 text-sm text-gray-500">Source: PMC Article</p>
+            </div>
+            <!-- Statistic 3 -->
+            <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-2xl font-semibold text-red-600">Global Stray Dog Population</h3>
+                <p class="mt-4 text-gray-700">The World Health Organization estimates there are nearly 200 million stray dogs worldwide, many suffering from health issues due to lack of monitoring.</p>
+                <p class="mt-2 text-sm text-gray-500">Source: FOUR PAWS International</p>
+            </div>
+            <!-- Statistic 4 -->
+            <div class="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 class="text-2xl font-semibold text-purple-600">Public Health Concerns</h3>
+                <p class="mt-4 text-gray-700">The overpopulation of stray dogs is a serious public health and animal welfare concern, contributing to environmental pollution and transmission of zoonotic diseases.</p>
+                <p class="mt-2 text-sm text-gray-500">Source: PMC Article</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- CSS for Scroll Animation -->
+<style>
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    }
+
+    .scroll-active {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+</style>
+
+<!-- JavaScript for Scroll Animation -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".scroll-reveal");
+        function revealOnScroll() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight * 0.85) {
+                    section.classList.add("scroll-active");
+                }
+            });
+        }
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+    });
+</script>
+
+
+
+<!-- Section 3: The Growing Need for AI-Based Stray Dog Health Monitoring -->
+<section class="flex flex-col items-center justify-center bg-gray-100 text-gray-900 text-center py-16 px-6">
+    <div class="max-w-5xl opacity-0 transform translate-y-10 transition-all duration-1000 scroll-reveal">
+        <h2 class="text-3xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mb-6">
+            The Growing Need for Smart Stray Dog Health Monitoring
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Graph 1: Rising Stray Dog Accidents & Health Issues -->
+            <div class="bg-white p-6 shadow-lg rounded-lg w-full h-72 overflow-hidden">
+                <h3 class="text-lg font-semibold mb-2 text-indigo-600">Rising Stray Dog Accidents & Health Issues</h3>
+                <canvas id="accidentChart" class="w-full h-full"></canvas>
+                <p class="text-sm text-gray-500 mt-2">Source: WHO, Animal Welfare Board of India, FAO Reports</p>
+            </div>
+
+            <!-- Graph 2: Need for Smart Monitoring -->
+            <div class="bg-white p-6 shadow-lg rounded-lg w-full h-72 overflow-hidden">
+                <h3 class="text-lg font-semibold mb-2 text-green-600">Demand for AI-Based Health Monitoring</h3>
+                <canvas id="monitoringChart" class="w-full h-full"></canvas>
+                <p class="text-sm text-gray-500 mt-2">Source: Global Veterinary AI Report 2024</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Graphs -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const accidentCtx = document.getElementById("accidentChart").getContext("2d");
+        const monitoringCtx = document.getElementById("monitoringChart").getContext("2d");
+
+        // Graph 1: Stray Dog Accidents & Health Issues (India)
+        new Chart(accidentCtx, {
+            type: "line",
+            data: {
+                labels: ["2015", "2018", "2021", "2024"],
+                datasets: [{
+                    label: "Stray Dog Accidents (India, per year)",
+                    data: [12000, 18000, 25000, 34000],
+                    borderColor: "#FF6384",
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    fill: true
+                }, {
+                    label: "Reported Stray Dog Health Issues (per year)",
+                    data: [30000, 42000, 57000, 75000],
+                    borderColor: "#36A2EB",
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 80000 }
+                }
+            }
+        });
+
+        // Graph 2: Demand for AI-Based Health Monitoring (Global)
+        new Chart(monitoringCtx, {
+            type: "bar",
+            data: {
+                labels: ["2017", "2019", "2021", "2023"],
+                datasets: [{
+                    label: "Adoption of AI Pet Health Monitoring (Global, %)",
+                    data: [8, 20, 45, 75],
+                    backgroundColor: ["#4BC0C0", "#FFCD56", "#FF6384", "#36A2EB"]
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, max: 100 }
+                }
+            }
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- Final Call to Action: Join the Movement -->
+<section class="relative bg-gray-900 text-white py-16 px-6 text-center">
+    <div class="max-w-5xl mx-auto opacity-0 transform translate-y-10 transition-all duration-1000 scroll-reveal">
+        
+        <!-- Heading -->
+        <h2 class="text-4xl font-bold bg-gradient-to-r from-yellow-300 to-red-500 bg-clip-text text-transparent mb-4">
+            The Time to Act is Now
+        </h2>
+        <p class="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Every year, <strong>over 34,000 stray dogs in India</strong> suffer due to <strong>preventable accidents and health issues</strong>.
+            Without timely intervention, thousands of lives are lost to <strong>disease, starvation, and neglect</strong>.
+        </p>
+
+        <!-- Key Impact Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="p-6 bg-gray-800 shadow-lg rounded-lg">
+                <h3 class="text-3xl font-extrabold text-yellow-400">34,000+</h3>
+                <p class="text-gray-400 text-sm">Stray dog deaths in India each year due to accidents and untreated illnesses.</p>
+            </div>
+            <div class="p-6 bg-gray-800 shadow-lg rounded-lg">
+                <h3 class="text-3xl font-extrabold text-red-400">75%</h3>
+                <p class="text-gray-400 text-sm">Of stray dogs suffer from <strong>undetected, treatable diseases</strong> due to lack of monitoring.</p>
+            </div>
+            <div class="p-6 bg-gray-800 shadow-lg rounded-lg">
+                <h3 class="text-3xl font-extrabold text-green-400">80%</h3>
+                <p class="text-gray-400 text-sm">Increase in stray dog survival rates with <strong>early health tracking & intervention</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Strong Call to Action -->
+        <p class="text-lg text-gray-300 mt-10 max-w-3xl mx-auto leading-relaxed">
+            With <strong>AI-driven health monitoring</strong>, we can <strong>prevent suffering</strong>, <strong>detect illnesses early</strong>, and <strong>save thousands of lives</strong>.
+            Join us in building a future where <strong>no stray dog is left behind</strong>.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="mt-8 flex justify-center space-x-4">
+            <a href="" class="px-6 py-3 bg-yellow-500 text-gray-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-400 transition-all transform hover:scale-105">
+                Get Involved
+            </a>
+            <a href="" class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-400 transition-all transform hover:scale-105">
+                Support the Cause
+            </a>
+        </div>
+    </div>
+</section>
+
+</div>
+
+{% endblock %}
