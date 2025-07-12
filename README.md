@@ -22,35 +22,35 @@ The gathered data is analyzed using preset in-built condition sets to determine 
 
 ## Features
 
-1) Keep track of the health status of all your animals from a single place using the visual dashboard.
+### 1) Keep track of the health status of all your animals from a single place using the visual dashboard.
 <img width="1919" height="933" alt="Image" src="https://github.com/user-attachments/assets/6fd56af6-c46a-4383-b9aa-7c0f4750e1cc" />
 
 
 
 
 
-2) Monitor individual animal's health parameters using the easily understandable animal profile that visualizes their health parameters.
+### 2) Monitor individual animal's health parameters using the easily understandable animal profile that visualizes their health parameters.
 
 <img width="1914" height="914" alt="Image" src="https://github.com/user-attachments/assets/f37d4d7b-ab05-4d7a-b554-026cba449ff6" />
 
 
 
 
-3) Receive e-mail updates in case of emergency.
+### 3) Receive e-mail updates in case of emergency.
 
 <img width="1082" height="92" alt="Image" src="https://github.com/user-attachments/assets/daaf1b88-d8a4-42b4-aa31-4ff703013251" />
 
 
 
 
-4) Keep track of all your animals' live location by referring to the relative map.
+### 4) Keep track of all your animals' live location by referring to the relative map.
 
 <img width="1506" height="821" alt="Image" src="https://github.com/user-attachments/assets/9c686327-31fd-41ce-a8f1-8b635bad70d1" />
 
 
 
 
-5) Create different user accounts for different groups of animals/departments.
+### 5) Create different user accounts for different groups of animals/departments.
 
 <img width="1916" height="930" alt="Image" src="https://github.com/user-attachments/assets/2055bc20-dde4-460d-92bb-3680f091ec76" />
 
