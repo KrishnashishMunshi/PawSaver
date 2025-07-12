@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block body%}
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .map-overlay {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+            backdrop-filter: blur(8px);
+        }
+
+        .location-ring {
+            animation: locationPulse 2s infinite;
+        }
+
+        @keyframes locationPulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            70% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+    </style>
+
+    <div class="min-h-screen bg-gradient-to-br from-pink-50 via-white to-sky-50 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header Section -->
+            <div class="glass-card rounded-2xl shadow-lg p-6 mb-8">
+                <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div class="space-y-2">
+                        <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-600 to-sky-600 bg-clip-text text-transparent">
+                            Live Dog Tracker
+                        </h1>
+                  
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+                            <i class="fas fa-clock text-pink-500"></i>
+                            <span class="text-sm text-gray-600 font-medium">Last Updated: Just Now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
+                <!-- Map Section -->
+                <div class="xl:col-span-3 glass-card rounded-2xl shadow-lg p-6">
+                    <div class="relative">
+                        <canvas id="mapCanvas" width="1200" height="800" class="w-full rounded-xl border-2 border-pink-100 bg-white"></canvas>
+                        
+                        <!-- Scale Indicator -->
+                        <div class="absolute bottom-4 right-4 map-overlay rounded-lg p-3 shadow-md">
+                            <div class="flex flex-col space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-20 h-1 bg-gradient-to-r from-pink-400 to-pink-500"></div>
+                                    <span class="text-sm font-medium text-gray-700">100m</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <!-- Legend -->
+                    <div class="glass-card rounded-xl p-6 shadow-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Map Legend</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 rounded-full bg-gradient-to-r from-pink-400 to-pink-500"></div>
+                                <span class="text-gray-600">Your Location</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 rounded-full bg-gradient-to-r from-sky-400 to-sky-500"></div>
+                                <span class="text-gray-600">Dogs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+  
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+
+{% endblock %}

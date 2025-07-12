@@ -7,13 +7,12 @@
     <title>PawSaver - Dog Health Monitoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 
 </head>
 <body class = "min-h-screen flex flex-col">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/forms@0.4.0/dist/index.min.js"></script>
-    <script src="{{ url_for('static', filename='index.js') }}"></script>
     <!-- Navbar -->
 <nav class="bg-white/90 backdrop-blur-md shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
     <div class="container mx-auto px-6">
@@ -27,8 +26,8 @@
             <!-- Desktop Navigation -->
             <div class="hidden lg:flex items-center space-x-8" id="dynamic-nav">
                 {% if current_user.is_authenticated %}
-                    <a href="/" class="nav-link text-gray-600 hover:text-sky-600 transition-colors">Home</a>
                     <a href="/dashboard" class="nav-link text-gray-600 hover:text-sky-600 transition-colors">Dashboard</a>
+                    <a href="/map" class="nav-link text-gray-600 hover:text-sky-600 transition-colors">Location</a>
                     <a href="/aboutus" class="nav-link text-gray-600 hover:text-sky-600 transition-colors">About Us</a>
                     <a href="/logout" class="text-red-600 hover:text-red-700 font-semibold transition-colors">Logout</a>
                 {% else %}
@@ -77,12 +76,11 @@
     </div>
 </nav>
     <!-- Main Content Block -->
-    <main class="flex-grow">
+    <main class="flex-grow pt-20">  <!-- Added pt-20 -->
         {% block body %}
         <!-- Individual page content will be injected here -->
         {% endblock %}
     </main>
-
     <!-- Footer -->
     <footer class="bg-gradient-to-b from-sky-400 to-sky-500 text-gray-800">
         <!-- Main Footer Content -->
@@ -115,20 +113,6 @@
                         <li><a href="/privacy" class="text-gray-800 hover:text-pink-300 transition-colors">Privacy Policy</a></li>
                     </ul>
                 </div>
-
-                <!-- Newsletter -->
-                <div class="md:col-span-1">
-                    <h3 class="font-semibold text-xl mb-4">Stay Updated</h3>
-                    <form class="space-y-4">
-                        <div class="flex flex-col space-y-2">
-                            <input type="email" placeholder="Enter your email" 
-                                class="px-4 py-2 rounded-lg border-2 border-transparent focus:border-pink-300 focus:outline-none" />
-                            <button class="bg-pink-300 hover:bg-sky-600 text-gray-800 px-4 py-2 rounded-lg transition-colors">
-                                Subscribe
-                            </button>
-                        </div>
-                    </form>
-                </div>
             </div>
 
             <!-- Social Links -->
@@ -159,5 +143,6 @@
     
 
 </body>
+<script src="{{ url_for('static', filename='index.js') }}"></script>
 
 </html>

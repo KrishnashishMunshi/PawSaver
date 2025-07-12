@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
+
 <div class="overflow-hidden relative">
 <!-- Section 1: Introduction - Clean & Thematic -->
 <section class="h-screen flex items-center justify-center bg-white text-center relative overflow-hidden">
@@ -29,7 +30,7 @@
             <a href="#stats" class="px-6 py-3 bg-sky-500 text-white font-semibold rounded-lg shadow-lg hover:bg-sky-400 transition-all transform hover:scale-105">
                 Learn More
             </a>
-            <a href="" class="px-6 py-3 bg-pink-500 text-white font-semibold rounded-lg shadow-lg hover:bg-pink-400 transition-all transform hover:scale-105">
+            <a href="/signup" class="px-6 py-3 bg-pink-500 text-white font-semibold rounded-lg shadow-lg hover:bg-pink-400 transition-all transform hover:scale-105">
                 Join the Mission
             </a>
         </div>
@@ -57,7 +58,7 @@
 
 
 <!-- Section 2: Stray Dog Health Insights -->
-<section class="h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-900 text-center py-12">
+<section id ="stats" class="h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-900 text-center py-12">
     <div class="max-w-4xl opacity-0 transform translate-y-10 transition-all duration-1000 scroll-reveal">
         <h2 class="text-3xl font-bold mb-8 text-gray-800">
             Challenges Faced by Stray Dogs
@@ -106,106 +107,34 @@
     }
 </style>
 
-<!-- JavaScript for Scroll Animation -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const sections = document.querySelectorAll(".scroll-reveal");
-        function revealOnScroll() {
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < window.innerHeight * 0.85) {
-                    section.classList.add("scroll-active");
-                }
-            });
-        }
-        window.addEventListener("scroll", revealOnScroll);
-        revealOnScroll();
-    });
-</script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
-
-<!-- Section 3: The Growing Need for AI-Based Stray Dog Health Monitoring -->
-<section class="flex flex-col items-center justify-center bg-gray-100 text-gray-900 text-center py-16 px-6">
-    <div class="max-w-5xl opacity-0 transform translate-y-10 transition-all duration-1000 scroll-reveal">
-        <h2 class="text-3xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mb-6">
-            The Growing Need for Smart Stray Dog Health Monitoring
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Graph 1: Rising Stray Dog Accidents & Health Issues -->
-            <div class="bg-white p-6 shadow-lg rounded-lg w-full h-72 overflow-hidden">
-                <h3 class="text-lg font-semibold mb-2 text-indigo-600">Rising Stray Dog Accidents & Health Issues</h3>
-                <canvas id="accidentChart" class="w-full h-full"></canvas>
-                <p class="text-sm text-gray-500 mt-2">Source: WHO, Animal Welfare Board of India, FAO Reports</p>
-            </div>
-
-            <!-- Graph 2: Need for Smart Monitoring -->
-            <div class="bg-white p-6 shadow-lg rounded-lg w-full h-72 overflow-hidden">
-                <h3 class="text-lg font-semibold mb-2 text-green-600">Demand for AI-Based Health Monitoring</h3>
-                <canvas id="monitoringChart" class="w-full h-full"></canvas>
-                <p class="text-sm text-gray-500 mt-2">Source: Global Veterinary AI Report 2024</p>
-            </div>
-        </div>
+<div class="max-w-6xl mx-auto space-y-8">
+    <!-- First Chart -->
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <div class="mb-4">
+        <h2 class="text-xl font-bold text-gray-800">Stray Dog Incidents in India (2015-2024)</h2>
+        <p class="text-sm text-gray-500">Source: Animal Welfare Board of India, WHO Reports 2024</p>
+      </div>
+      <div class="h-80">
+        <canvas id="incidentsChart"></canvas>
+      </div>
     </div>
-</section>
 
-<!-- JavaScript for Graphs -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const accidentCtx = document.getElementById("accidentChart").getContext("2d");
-        const monitoringCtx = document.getElementById("monitoringChart").getContext("2d");
+    <!-- Second Chart -->
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <div class="mb-4">
+        <h2 class="text-xl font-bold text-gray-800">Stray Dog Health Monitoring Effectiveness (2017-2023)</h2>
+        <p class="text-sm text-gray-500">Source: Veterinary Public Health Studies, Municipal Corporation Data 2024</p>
+      </div>
+      <div class="h-80">
+        <canvas id="monitoringChart"></canvas>
+      </div>
+    </div>
+  </div>
 
-        // Graph 1: Stray Dog Accidents & Health Issues (India)
-        new Chart(accidentCtx, {
-            type: "line",
-            data: {
-                labels: ["2015", "2018", "2021", "2024"],
-                datasets: [{
-                    label: "Stray Dog Accidents (India, per year)",
-                    data: [12000, 18000, 25000, 34000],
-                    borderColor: "#FF6384",
-                    backgroundColor: "rgba(255, 99, 132, 0.2)",
-                    fill: true
-                }, {
-                    label: "Reported Stray Dog Health Issues (per year)",
-                    data: [30000, 42000, 57000, 75000],
-                    borderColor: "#36A2EB",
-                    backgroundColor: "rgba(54, 162, 235, 0.2)",
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: false,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true, max: 80000 }
-                }
-            }
-        });
 
-        // Graph 2: Demand for AI-Based Health Monitoring (Global)
-        new Chart(monitoringCtx, {
-            type: "bar",
-            data: {
-                labels: ["2017", "2019", "2021", "2023"],
-                datasets: [{
-                    label: "Adoption of AI Pet Health Monitoring (Global, %)",
-                    data: [8, 20, 45, 75],
-                    backgroundColor: ["#4BC0C0", "#FFCD56", "#FF6384", "#36A2EB"]
-                }]
-            },
-            options: {
-                responsive: false,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true, max: 100 }
-                }
-            }
-        });
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 <!-- Final Call to Action: Join the Movement -->
@@ -256,5 +185,6 @@
 </section>
 
 </div>
+<script src="{{ url_for('static', filename='js/aboutus.js') }}"></script>
 
 {% endblock %}

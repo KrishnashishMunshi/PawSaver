@@ -1,116 +1,105 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<style>
-#pulseChart {
-    max-width: 100%;
-    height: 300px !important; /* Prevents endless stretching */
-}
-</style>>
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-20">
-    <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
-        <h1 class="text-3xl font-bold bg-gradient-to-r from-sky-600 to-pink-400 bg-clip-text text-transparent">
-            {{ dog.name }}'s Profile
-        </h1>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dog_profile.css') }}">
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-16">
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-12 space-y-4 sm:space-y-0">
+        <div class="space-y-2">
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-sky-700 to-pink-500 bg-clip-text text-transparent">
+                {{ dog.name }}'s Profile
+            </h1>
+            <p class="text-gray-600">Monitoring health metrics in real-time</p>
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <img src="{{ dog.image_url }}" class="w-full h-60 object-cover rounded-lg" alt="{{ dog.name }}">
-            <p class="text-lg mt-4"><strong>Age:</strong> {{ dog.age }} years</p>
-            <p class="text-lg"><strong>Health Status:</strong> {{ dog.health_status }}</p>
-            <p class="text-lg"><strong>Distance:</strong> {{ dog.distance }} km away</p>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Profile Card -->
+        <div class="glass-card rounded-xl shadow-lg overflow-hidden">
+            <div class="p-6 space-y-6">
+                <!-- Status Icon -->
+                <div class="status-icon 
+                    {% if dog.health_status == 'Healthy' %} bg-green-100
+                    {% elif dog.health_status == 'At Risk' %} bg-yellow-100
+                    {% else %} bg-red-100 {% endif %}">
+                    <i class="fas fa-heartbeat 
+                        {% if dog.health_status == 'Healthy' %} text-green-500
+                        {% elif dog.health_status == 'At Risk' %} text-yellow-500
+                        {% else %} text-red-500 {% endif %}">
+                    </i>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold text-gray-800">Health Status</h2>
+                    <span class="px-4 py-1.5 rounded-full text-sm font-semibold
+                        {% if dog.health_status == 'Healthy' %} bg-gradient-to-r from-green-400 to-green-500 text-white
+                        {% elif dog.health_status == 'At Risk' %} bg-gradient-to-r from-yellow-400 to-orange-400 text-white
+                        {% else %} bg-gradient-to-r from-red-500 to-pink-500 text-white {% endif %}
+                        shadow-sm">
+                        {{ dog.health_status }}
+                    </span>
+                </div>
+                <!-- Health Status Explanation -->
+                <div class="health-tips
+                    {% if dog.health_status == 'Healthy' %} bg-green-50
+                    {% elif dog.health_status == 'At Risk' %} bg-yellow-50
+                    {% else %} bg-red-50 {% endif %}">
+                    {% if dog.health_status == 'Healthy' %}
+                        <h3 class="text-lg font-semibold text-green-700 mb-2">Excellent Condition</h3>
+                        <p class="text-green-600">Your dog is showing optimal vital signs and activity levels. Regular check-ups and maintaining current routines are recommended.</p>
+                    {% elif dog.health_status == 'At Risk' %}
+                        <h3 class="text-lg font-semibold text-yellow-700 mb-2">Requires Attention</h3>
+                        <p class="text-yellow-600">Some vital signs are outside normal ranges. A veterinary check-up is recommended within the next few days.</p>
+                    {% else %}
+                        <h3 class="text-lg font-semibold text-red-700 mb-2">Immediate Care Needed</h3>
+                        <p class="text-red-600">Critical vital signs detected. Please contact a veterinarian immediately for proper medical attention.</p>
+                    {% endif %}
+                </div>
+
+                <div class="space-y-4 mt-6">
+                    <div class="stat-item flex items-center space-x-4 p-4 rounded-lg bg-gray-50">
+                        <div class="bg-sky-100 p-2 rounded-lg">
+                            <i class="fas fa-birthday-cake text-sky-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Age</p>
+                            <p class="text-lg font-bold text-gray-800">{{ dog.age }} years</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Pulse Rate</h2>
-            <canvas id="pulseChart" width="400" height="250"></canvas>
+        <!-- Pulse Rate Card -->
+        <div class="glass-card rounded-xl shadow-lg p-6">
+            <div class="chart-container">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Pulse Rate Monitor</h2>
+                    <div id="currentPulse" class="pulse-badge bg-gradient-to-r from-sky-500 to-pink-500 text-white">
+                        -- BPM
+                    </div>
+                </div>
+                <canvas id="pulseChart"></canvas>
+            </div>
+        </div>
 
+        <!-- Blood Oxygen Card -->
+        <div class="glass-card rounded-xl shadow-lg p-6 flex flex-col justify-center items-center">
+            <div class="flex items-center justify-between mb-6 w-full">
+                <h2 class="text-2xl font-bold text-gray-800">Blood Oxygen (SpO2)</h2>
+                <div id="oxygenBadge" class="oxygen-badge bg-gradient-to-r from-sky-500 to-pink-500 text-white">
+                    {{ dog.blood_oxygen }}%
+                </div>
+            </div>
+            <div class="text-center">
+                <p id="spo2Value" class="spo2-value">{{ dog.blood_oxygen }}</p>
+                <p class="spo2-unit">SpO2 (%)</p>
+            </div>
         </div>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-let pulseChart;
-let lastPulse = Math.floor(Math.random() * (100 - 80) + 80);
 
-function generateRealisticPulseData() {
-    let newPulseData = [];
-    
-    for (let i = 0; i < 10; i++) {
-        let newPulse = lastPulse + Math.floor(Math.random() * 6 - 3);
-        newPulse = Math.max(70, Math.min(120, newPulse));
-        newPulseData.push(newPulse);
-        lastPulse = newPulse;
-    }
+<script src="{{ url_for('static', filename='js/dog_profile.js') }}"></script>
 
-    return newPulseData;
-}
-
-function getCurrentTimeLabels() {
-    let labels = [];
-    let now = new Date();
-    
-    for (let i = 9; i >= 0; i--) {
-        let time = new Date(now.getTime() - i * 5000); // 5-second intervals
-        let minutes = time.getMinutes().toString().padStart(2, '0');
-        let seconds = time.getSeconds().toString().padStart(2, '0');
-        labels.push(`${minutes}:${seconds}`);
-    }
-
-    return labels;
-}
-
-function renderChart() {
-    const ctx = document.getElementById('pulseChart').getContext('2d');
-
-    pulseChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: getCurrentTimeLabels(),
-            datasets: [{
-                label: 'Pulse Rate (BPM)',
-                data: generateRealisticPulseData(),
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 6, // Larger points for better visibility
-                pointHoverRadius: 8 // Hover effect on points
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: { duration: 500 },
-            scales: {
-                x: {
-                    title: { display: true, text: 'Time (Last 10 Readings)' },
-                    grid: { display: false }
-                },
-                y: {
-                    min: 60,  // Expanding the scale for better visibility
-                    max: 140,
-                    title: { display: true, text: 'Pulse Rate (BPM)' },
-                    grid: { color: 'rgba(200, 200, 200, 0.3)' },
-                    ticks: { stepSize: 5 } // More granularity in readings
-                }
-            }
-        }
-    });
-
-    setInterval(updateChart, 5000);
-}
-
-function updateChart() {
-    pulseChart.data.labels = getCurrentTimeLabels();
-    pulseChart.data.datasets[0].data = generateRealisticPulseData();
-    pulseChart.update();
-}
-
-renderChart();
-
-</script>
 {% endblock %}
-

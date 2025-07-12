@@ -71,3 +71,28 @@
     animation-delay: 2s;
 }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+        width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+        background: #f1f5f9; /* light sky blue background */
+        border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #0ea5e9, #ec4899); /* sky-500 to pink-500 gradient */
+        border-radius: 8px;
+        border: 3px solid #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #0284c7, #db2777); /* sky-600 to pink-600 gradient */
+        }
+
+        /* For Firefox */
+        * {
+        scrollbar-width: thin;
+        scrollbar-color: #0ea5e9 #f1f5f9;
+        }
